@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lista_tarefas/home_page.dart';
+import 'package:lista_tarefas/animation/animated_initial.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const animatedInitial(),
     );
   }
 }

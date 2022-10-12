@@ -1,8 +1,9 @@
 // ignore_for_file: unnecessary_string_escapes
 
 import 'package:flutter/material.dart';
-import 'package:lista_tarefas/models/tarefas.dart';
-import 'package:lista_tarefas/widgets/itens_lista.dart';
+import 'package:lista_tarefas/models/tasks.dart';
+import 'package:lista_tarefas/repository/task_repository.dart';
+import 'package:lista_tarefas/widgets/items_list.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -15,22 +16,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Tasks> tasks = [];
+  final TaskRepository taskRepository = TaskRepository();
 
   void addTarefa(String tarefa) {
     setState(() {
       Tasks task1 = Tasks(
         title: tarefa,
-        date: DateTime.now().subtract(
-          const Duration(hours: 3),
-        ),
+        date: DateTime.now(),
       );
       tasks.add(task1);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Tarefa adicionada com sucesso!'),
         ),
       );
       assigmentController.clear();
+      // taskRepository.saveTasks(tasks);
     });
   }
 
@@ -176,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       builder: (BuildContext context) =>
                                           AlertDialog(
                                         title: const Text(
-                                            'Não existem tarefa(s) adicionada(s)!'),
+                                            'Não existem tarefas adicionadas!'),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
@@ -207,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   .showSnackBar(
                                                 const SnackBar(
                                                   content: Text(
-                                                      'Tarefa(s) removida(s) com sucesso!'),
+                                                      'Tarefas removidas com sucesso!'),
                                                 ),
                                               );
                                             },
